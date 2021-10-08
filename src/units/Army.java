@@ -13,7 +13,7 @@ public class Army {
     // fields
 
     private String name;
-    private int strength;
+    private double strength;
     private int currHP;
     private int maxHP;
 
@@ -21,9 +21,9 @@ public class Army {
 
     public Army(String name){
         this.name = name;
-        this.strength = 10;
         this.currHP = 100;
         this.maxHP = 100;
+        this.strength = (double) this.currHP / 10;
     }
 
     // methods
@@ -46,7 +46,12 @@ public class Army {
             System.out.println("========DAY" + day + "========");
             // defender does damage
             if (!enemy.isDead()) {
-                enemy.doDamage(this);
+                int enemyDamage = enemy.doDamage(this);
+                if (enemyDamage == 0){
+                    System.out.println(enemy.getName() + " flees!");
+                    victor = this;
+                    break;
+                }
             } else {
                 System.out.println(enemy.getName() + " has been wiped out!");
                 victor = this;
@@ -54,7 +59,13 @@ public class Army {
             }
             // attacker does damage
             if (!this.isDead()) {
-                this.doDamage(enemy);
+                int thisDamage = this.doDamage(enemy);
+                if (thisDamage == 0){
+                    System.out.println(this.getName() + " flees!");
+                    victor = enemy;
+                    break;
+                }
+
             } else {
                 System.out.println(this.name + " has been wiped out!");
                 victor = enemy;
@@ -66,7 +77,7 @@ public class Army {
             day++;
         }
         System.out.println(victor.getName() + " wins the battle!\n"
-        + "but with only " + getCurrHP() + " health left...");
+        + "but with only " + victor.getCurrHP() + " health left...");
     }
 
     /**
@@ -89,10 +100,11 @@ public class Army {
      * The army does damage to the enemy army
      * @param enemy the enemy army
      */
-    public void doDamage(Army enemy) {
+    public int doDamage(Army enemy) {
         int damage = getDamage();
         enemy.takeDamage(damage);
         System.out.println(this.name + " attacks " + enemy.getName() + " for " + damage + " damage");
+        return damage;
     }
 
     /**
@@ -104,6 +116,7 @@ public class Army {
          if (currHP < 0) {
              currHP = 0;
          }
+         this.strength = (double) currHP / 10;
     }
 
     /**
