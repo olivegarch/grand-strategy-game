@@ -11,7 +11,20 @@ public class Province {
 
     // fields
 
+    private String name;
+    private Weather weather;
+    private Terrain terrain;
+    private Vegetation vegetation;
+
     // constructor
+
+    public Province(String name, Weather weather, Terrain terrain, Vegetation vegetation) {
+        this.name = name;
+        this.weather = weather;
+        this.terrain = terrain;
+        this.vegetation = vegetation;
+
+    }
 
     // methods
 
