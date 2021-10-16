@@ -1,11 +1,15 @@
 package units;
 
+import game.Battle;
+import map.Province;
+
 import java.util.Random;
 
 /**
  * The army class
  * Represents a collection of soldiers moving as one unit.
  * The army can move and attack.
+ *
  * @author OliveGarch
  */
 public class Army {
@@ -16,11 +20,13 @@ public class Army {
     private double strength;
     private int currHP;
     private int maxHP;
+    private Province location;
 
     // constructor
 
-    public Army(String name){
+    public Army(String name, Province location){
         this.name = name;
+        this.location = location;
         this.currHP = 100;
         this.maxHP = 100;
         this.strength = (double) this.currHP / 10;
@@ -38,46 +44,8 @@ public class Army {
      * @param enemy the defending army
      */
     public void battle(Army enemy) {
-        System.out.println(this.name + " attacks " + enemy.getName());
-        int day = 1;
-        // defender is victorious by default
-        Army victor = enemy;
-        while ((this.currHP > 0) && (enemy.currHP > 0)) {
-            System.out.println("========DAY" + day + "========");
-            // defender does damage
-            if (!enemy.isDead()) {
-                int enemyDamage = enemy.doDamage(this);
-                if (enemyDamage == 0){
-                    System.out.println(enemy.getName() + " flees!");
-                    victor = this;
-                    break;
-                }
-            } else {
-                System.out.println(enemy.getName() + " has been wiped out!");
-                victor = this;
-                break;
-            }
-            // attacker does damage
-            if (!this.isDead()) {
-                int thisDamage = this.doDamage(enemy);
-                if (thisDamage == 0){
-                    System.out.println(this.getName() + " flees!");
-                    victor = enemy;
-                    break;
-                }
-
-            } else {
-                System.out.println(this.name + " has been wiped out!");
-                victor = enemy;
-                break;
-            }
-            // print army healths
-            System.out.println(this.name + " health: " + this.currHP);
-            System.out.println(enemy.getName() + " health: " + enemy.getCurrHP());
-            day++;
-        }
-        System.out.println(victor.getName() + " wins the battle!\n"
-        + "but with only " + victor.getCurrHP() + " health left...");
+        Battle battle = new Battle(this, enemy);
+        battle.fight();
     }
 
     /**
@@ -96,12 +64,16 @@ public class Army {
         return currHP == 0;
     }
 
+    public Province getLocation() {
+        return this.location;
+    }
+
     /**
      * The army does damage to the enemy army
      * @param enemy the enemy army
      */
     public int doDamage(Army enemy) {
-        int damage = getDamage();
+        int damage = calculateDamage();
         enemy.takeDamage(damage);
         System.out.println(this.name + " attacks " + enemy.getName() + " for " + damage + " damage");
         return damage;
@@ -125,7 +97,7 @@ public class Army {
      * st.dev= strength / 5
      * @return the random damage
      */
-    private int getDamage() {
+    private int calculateDamage() {
         double mean = strength;
         double stDev = (double) strength / 5;
         Random rand = new Random();

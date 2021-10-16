@@ -18,15 +18,19 @@ public class Province {
 
     // constructor
 
-    public Province(String name, Weather weather, Terrain terrain, Vegetation vegetation) {
+    public Province(String name, Terrain terrain, Vegetation vegetation) {
         this.name = name;
-        this.weather = weather;
+        // TODO Add weather later
+        // this.weather = weather;
         this.terrain = terrain;
         this.vegetation = vegetation;
-
     }
 
     // methods
+
+    public String getName() {
+        return this.name;
+    }
 
 
 }

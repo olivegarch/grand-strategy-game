@@ -1,5 +1,9 @@
 package map;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 /**
  * The Region class
  * Represents a cartesian map of provinces,
@@ -9,10 +13,18 @@ package map;
 public class Region {
 
     private String name;
-    private int[][] coordMap = new int[5][5];
+    private Province[][] coordMap = new Province[5][5];
 
-    public Region(String name) {
+    public Region(String name, String fileName) throws FileNotFoundException {
         this.name = name;
+        // read in full data
+        Scanner data = new Scanner(new File(fileName));
+        while (data.hasNextLine()) {
+            // read in one line
+            String line = data.nextLine();
+            // split into array
+            // create province in coordMap at (line#, char#)
+        }
     }
 
 }
