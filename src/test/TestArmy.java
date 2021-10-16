@@ -16,7 +16,7 @@ public class TestArmy {
 
     @Test
     public void testBattle() {
-        Province southfield = new Province("Southfield", Terrain.HILLS, Vegetation.GRASSLAND);
+        Province southfield = new Province("Southfield");
         Army army1 = new Army("army1", southfield);
         Army army2 = new Army("army2", southfield);
         army1.battle(army2);
