@@ -11,7 +11,6 @@ import units.Army;
  * @author OliveGarch
  */
 public class Battle {
-
     // fields
 
     // defender
