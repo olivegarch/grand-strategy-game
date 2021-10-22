@@ -30,7 +30,6 @@ public class Region {
         } catch (FileNotFoundException e) {
             System.out.println("File " + fileName + " not found:: Using default data");
         }
-
     }
 
     // graph mutator methods
