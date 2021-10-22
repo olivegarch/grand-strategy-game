@@ -7,7 +7,7 @@ import org.junit.Test;
 import units.Army;
 
 /**
- * A test class for Army
+ * A test class for Army.
  *
  * @author OliveGarch
  */

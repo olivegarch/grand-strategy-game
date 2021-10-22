@@ -32,11 +32,43 @@ public class Province {
 
     // methods
 
+    /**
+     * Gets the name of the Province
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Compares if two Provinces have the same name,
+     * and thus, are equal
+     * @param other the other Province
+     * @return true if they have the same name, false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Province) {
+            return this.getName().equals(( (Province)other ).getName());
+        } else {
+            return false;
+        }
+    }
 
+    /**
+     * Generates a hash code for the Province.
+     * @return the hash code
+     */
+    public int hashCode() {
+        return this.name.hashCode();
+    }
 
-
+    /**
+     * Generates a string representation of the Province
+     * @return the string
+     */
+    @Override
+    public String toString() {
+        return "Province{" + this.name + "}";
+    }
 }
