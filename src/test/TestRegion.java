@@ -1,5 +1,6 @@
 package test;
 
+import map.Province;
 import map.Region;
 
 /**
@@ -9,6 +10,9 @@ import map.Region;
  */
 public class TestRegion {
     public static void main(String[] args) {
-        Region region1 = new Region("Region1", "graphRegion1.txt");
+        Region region1 = new Region("Region1");
+        String provinces = "Hills Plains Forest Riverbed";
+        region1.generateMap(provinces);
+        System.out.println(region1);
     }
 }

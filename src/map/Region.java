@@ -16,30 +16,31 @@ public class Region {
     private HashMap<Province, HashSet<Province>> regionMap = new HashMap<>();
 
 
-    public Region(String name, String fileName) throws FileNotFoundException {
+    public Region(String name) {
         this.name = name;
-        // read in full data
-        try {
-            Scanner data = new Scanner(new File(fileName));
-            while (data.hasNextLine()) {
-                // read in one line
-                String line = data.nextLine();
-                String[] provinceFields = line.split(" ");
-                Province newProvince = new Province(provinceFields[0]);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File " + fileName + " not found:: Using default data");
-        }
     }
 
     // graph mutator methods
 
+    public void generateMap(String data) {
+        for (String name : data.split(" ")) {
+            Province newProvince = new Province(name);
+            this.addProvince(newProvince);
+        }
+        for (Province node : this.getProvinces()) {
+            for (Province neighbor : this.getProvinces()) {
+                this.addBorder(node, neighbor);
+            }
+        }
+
+    }
+
     /**
      * Adds a Province to the regionMap.
-     * @param name the name of the Province added
+     * @param node the Province added
      */
-    private void addProvince(String name) {
-        regionMap.putIfAbsent(new Province(name), new HashSet<>());
+    private void addProvince(Province node) {
+        regionMap.putIfAbsent(node, new HashSet<>());
     }
 
     /**
@@ -72,6 +73,10 @@ public class Region {
         return regionMap.get(node);
     }
 
+    /**
+     * Generates a string representation of the Region.
+     * @return the string
+     */
     public String toString() {
         String result = "Region{label=" + this.name + "} Provinces:";
         for (Province node : regionMap.keySet()) {

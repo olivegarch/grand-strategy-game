@@ -35,17 +35,25 @@ public class Army {
     // methods
 
     /**
-     * A battle between 2 armies.
+     * Starts a battle between 2 armies.
      * They attack each other until one is dead in the following order:
      * Defender does damage
      * Attacker does damage
      *
-     * this the attacking army
+     *        this the attacking army
      * @param enemy the defending army
      */
     public void battle(Army enemy) {
         Battle battle = new Battle(this, enemy);
-        battle.fight();
+        battle.advanceDay();
+    }
+
+    /**
+     * Starts a movement between 2 provinces.
+     * @param location the destination
+     */
+    public void move(Province location) {
+
     }
 
     /**

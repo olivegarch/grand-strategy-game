@@ -14,13 +14,10 @@ import units.Army;
 
 public class TestArmy {
 
-    @Test
-    public void testBattle() {
+    public static void main(String[] args) {
         Province southfield = new Province("Southfield");
         Army army1 = new Army("army1", southfield);
         Army army2 = new Army("army2", southfield);
         army1.battle(army2);
     }
-
-
 }
