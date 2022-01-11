@@ -135,4 +135,13 @@ public class Battle implements Event{
             System.out.println("...But the glory was not without cost. " + victor.getName() + " lost " + (100 - victor.getCurrHP()) + " of its best soldiers");
         }
     }
+
+    /**
+     * Returns true if the battle has been completed
+     * Returns false otherwise
+     * @return if the battle is over
+     */
+    public boolean isComplete(){
+        return this.battleComplete;
+    }
 }
