@@ -87,7 +87,9 @@ public class Battle implements Event{
 
     @Override
     public void advanceDay() {
-        fightOneDay();
+        if (!this.isComplete()) {
+            fightOneDay();
+        }
     }
 
     /**

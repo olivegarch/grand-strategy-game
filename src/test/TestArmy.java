@@ -31,5 +31,6 @@ public class TestArmy {
             battle1.advanceDay();
             input = in.nextLine();
         }
+        in.close();
     }
 }
