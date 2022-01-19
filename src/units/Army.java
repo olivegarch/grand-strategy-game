@@ -53,7 +53,8 @@ public class Army {
      * @param location the destination
      */
     public void move(Province location) {
-
+        // TODO fix from instant to a discrete timed event
+        this.location = location;
     }
 
     /**
