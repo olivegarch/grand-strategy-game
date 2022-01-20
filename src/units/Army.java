@@ -20,6 +20,7 @@ public class Army {
     private double strength;
     private int currHP;
     private int maxHP;
+    private int speed;
     private Province location;
 
     // constructor
@@ -29,6 +30,7 @@ public class Army {
         this.location = location;
         this.currHP = 100;
         this.maxHP = 100;
+        this.speed = 10;
         this.strength = (double) this.currHP / 10;
     }
 
@@ -42,10 +44,12 @@ public class Army {
      *
      *        this the attacking army
      * @param enemy the defending army
+     * @return the battle
      */
-    public void battle(Army enemy) {
+    public Battle battle(Army enemy) {
         Battle battle = new Battle(this, enemy);
         battle.advanceDay();
+        return battle;
     }
 
     /**

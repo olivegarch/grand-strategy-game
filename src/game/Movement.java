@@ -14,6 +14,11 @@ public class Movement implements Event{
     private Province startProv;
     private Province finishProv;
 
+    public Movement(Army army, Province finishProv) {
+        this.army = army;
+        this.startProv = army.getLocation();
+        this.finishProv = finishProv;
+    }
 
     /**
      * Handles event updates when day is advanced.
@@ -21,6 +26,5 @@ public class Movement implements Event{
      */
     @Override
     public void advanceDay() {
-
     }
 }
