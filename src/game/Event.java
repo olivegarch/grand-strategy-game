@@ -12,4 +12,10 @@ public interface Event {
      * Handles event updates when day is advanced.
      */
     void advanceDay();
+
+    /**
+     * Returns if the event is complete or not
+     * @return True if complete, False otherwise
+     */
+    boolean isComplete();
 }

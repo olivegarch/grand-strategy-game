@@ -112,13 +112,23 @@ public class Army {
      */
     private int calculateDamage() {
         double mean = strength;
-        double stDev = (double) strength / 5;
+        double stDev = strength / 5;
         Random rand = new Random();
         double zScore = rand.nextGaussian();
         return (int) ( mean + (stDev * zScore));
     }
 
+    /**
+     * Returns the name of the army
+     * @return the name
+     */
     public String getName() {
         return this.name;
     }
+
+    /**
+     * Returns the speed of the army
+     * @return the speed
+     */
+    public int getSpeed() {return this.speed;}
 }
