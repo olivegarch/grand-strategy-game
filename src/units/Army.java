@@ -1,6 +1,7 @@
 package units;
 
 import game.Battle;
+import game.Movement;
 import map.Province;
 
 import java.util.Random;
@@ -47,18 +48,16 @@ public class Army {
      * @return the battle
      */
     public Battle battle(Army enemy) {
-        Battle battle = new Battle(this, enemy);
-        battle.advanceDay();
-        return battle;
+        return new Battle(this, enemy);
     }
 
     /**
      * Starts a movement between 2 provinces.
-     * @param location the destination
+     * @param finishProv the destination
      */
-    public void move(Province location) {
+    public Movement move(Province finishProv) {
         // TODO fix from instant to a discrete timed event
-        this.location = location;
+        return new Movement(this, finishProv);
     }
 
     /**
@@ -77,8 +76,16 @@ public class Army {
         return currHP == 0;
     }
 
+    /**
+     * Gets the current location
+     * @return the current location
+     */
     public Province getLocation() {
         return this.location;
+    }
+
+    public void setLocation(Province province) {
+        this.location = province;
     }
 
     /**
