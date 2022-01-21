@@ -16,18 +16,11 @@ public class TestMovement {
     public static void main(String[] args) {
         // make region
         Region region = new Region("region1");
-        region.generateMap("Fields Hills Forest");
-        Province startingProv = null;
-        Province finishingProv = null;
-        for (Province province : region.getProvinces()) {
-            if (startingProv == null) {
-                startingProv = province;
-            } else if (finishingProv == null) {
-                finishingProv = province;
-            } else {
-                break;
-            }
-        }
+        String provincesStr = "Fields Hills Forest";
+        region.generateMap(provincesStr);
+        String[] provinces = provincesStr.split(" ");
+        Province startingProv = region.searchProvince(provinces[0]);
+        Province finishingProv = region.searchProvince(provinces[1]);
 
         // make army
         Army army = new Army("army1", startingProv);

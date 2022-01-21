@@ -39,10 +39,11 @@ public class Battle implements Event{
     // methods
 
     /**
+     * (DEBUG TOOL)
      * The two armies that are clashing,
      * fight until one deals no damage and flees, ending the fight.
      */
-    public void fightComplete() {
+    public void fightCompletely() {
         System.out.println("Battle of " + location.getName());
         int day = 1;
         // defender is victorious by default

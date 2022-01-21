@@ -57,6 +57,20 @@ public class Region {
     }
 
     /**
+     * Given a label, returns the province with that label
+     * @param label the province name
+     * @return the province if found in the region map, null if not found
+     */
+    public Province searchProvince(String label) {
+        for (Province province : regionMap.keySet()) {
+            if (province.getName().equals(label)) {
+                return province;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Gets the set of the Region's Provinces
      * @return the set
      */
@@ -72,6 +86,8 @@ public class Region {
     public HashSet<Province> getNeighbors(Province node) {
         return regionMap.get(node);
     }
+
+
 
     /**
      * Generates a string representation of the Region.

@@ -27,6 +27,14 @@ public class Movement implements Event{
     }
 
     /**
+     * (DEBUG TOOL)
+     * Resets the army's location to the specified finish province.
+     */
+    public void moveCompletely() {
+        this.army.setLocation(finishProv);
+    }
+
+    /**
      * Handles event updates when day is advanced.
      * Updates movement progression from start to finish
      */

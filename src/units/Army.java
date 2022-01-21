@@ -56,7 +56,6 @@ public class Army {
      * @param finishProv the destination
      */
     public Movement move(Province finishProv) {
-        // TODO fix from instant to a discrete timed event
         return new Movement(this, finishProv);
     }
 
