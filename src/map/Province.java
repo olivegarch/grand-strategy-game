@@ -3,7 +3,7 @@ package map;
 import java.util.HashSet;
 
 /**
- * The province class
+ * The Province class
  * Represents a single location
  * in which armies can station, battle and move to.
  *

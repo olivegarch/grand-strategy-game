@@ -7,7 +7,7 @@ import map.Province;
 import java.util.Random;
 
 /**
- * The army class
+ * The Army class
  * Represents a collection of soldiers moving as one unit.
  * The army can move and attack.
  *

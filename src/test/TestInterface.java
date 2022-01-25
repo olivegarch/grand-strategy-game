@@ -1,9 +1,13 @@
 package test;
 
+import game.Clock;
+import game.Event;
+import game.Movement;
 import map.Province;
 import map.Region;
 import units.Army;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -28,6 +32,12 @@ public class TestInterface {
         // make computer army
         Army compArmy = new Army("Computer", startingProv);
 
+        // make event list
+        ArrayList<Event> events = new ArrayList<>();
+
+        // make global clock
+        Clock clock = new Clock();
+
         // welcome message
         System.out.println("WELCOME TO THE BATTLEFIELD");
         System.out.println("This is the playground to test features of the game in progress");
@@ -35,6 +45,7 @@ public class TestInterface {
         // prompt user
         String helpMsg = "Commands: \n- quit" +
                 "\n- help" +
+                "\n- day (advances the time forward one day)"+
                 "\n[TODO]- move [province] (moves your army to an adjacent province)" +
                 "\n[TODO]- attack [army] (attacks the specified army if they are in an adjacent province)" +
                 "\n[TODO]- status (shows current status of your army)" +
@@ -47,8 +58,16 @@ public class TestInterface {
             System.out.print("> ");
             input = scanner.nextLine();
             String[] inputList = input.split(" ");
+
+            // Display help message //
             if (input.equals("help")) {
                 System.out.println(helpMsg);
+
+            // Advance one day //
+            } else if (input.equals("day")) {
+                // TODO delete events that have completed
+                clock.adv1day(events);
+            // Move between provinces //
             } else if (inputList[0].equals("move")) {
                 // TODO
                 if (inputList.length == 2) {
@@ -58,7 +77,13 @@ public class TestInterface {
                             neighborFound = true;
                             System.out.println("Marching from " + playerArmy.getLocation().getName() +
                                     " to " + neighbor.getName() + "...");
-                            playerArmy.move(neighbor);
+                            Movement newMove = (playerArmy.move(neighbor));
+                            if (!events.contains(newMove)) {
+                                events.add(newMove);
+                            } else {
+                                System.out.println("ERROR: Already moving from " + playerArmy.getLocation().getName() +
+                                        " to " + inputList[1]);
+                            }
                             break;
                         }
                     }
@@ -69,16 +94,25 @@ public class TestInterface {
                 } else {
                     System.out.println("ERROR: Invalid use of 'move'. \n'move' takes one parameter, the target province");
                 }
+
+            // Attack another army //
             } else if (inputList[0].equals("attack")) {
                 // TODO
+                // TODO account for duplicate battles
+
+            // Display status //
             } else if (inputList[0].equals("status")) {
                 // TODO reformat? (this is fine right now though)
                 System.out.println("Name: " + playerArmy.getName() +
                         "\nHealth: " + playerArmy.getCurrHP());
+
+            // Display location //
             } else if (inputList[0].equals("loc")) {
                 // TODO reformat to look pretty
                 System.out.println("Current province: " + playerArmy.getLocation() +
                         "\nNeighboring provinces: " + region.getNeighbors(playerArmy.getLocation()));
+
+            // quit //
             } else if (inputList[0].equals("quit")) {
                 break;
             } else {
