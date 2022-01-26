@@ -43,7 +43,8 @@ public class TestInterface {
         System.out.println("This is the playground to test features of the game in progress");
 
         // prompt user
-        String helpMsg = "Commands: \n- quit" +
+        String helpMsg = "Commands: " +
+                "\n- quit" +
                 "\n- help" +
                 "\n- day (advances the time forward one day)"+
                 "\n[TODO]- move [province] (moves your army to an adjacent province)" +
@@ -99,6 +100,9 @@ public class TestInterface {
             } else if (inputList[0].equals("attack")) {
                 // TODO
                 // TODO account for duplicate battles
+                if (inputList.length == 2) {
+
+                }
 
             // Display status //
             } else if (inputList[0].equals("status")) {

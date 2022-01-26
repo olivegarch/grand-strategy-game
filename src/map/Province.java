@@ -1,6 +1,9 @@
 package map;
 
-import java.util.HashSet;
+import units.Army;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Province class
@@ -14,6 +17,8 @@ public class Province {
     // fields
 
     private String name;
+    private List<Army> residents;
+
     private Weather weather;
     private Terrain terrain;
     private Vegetation vegetation;
@@ -22,6 +27,8 @@ public class Province {
 
     public Province(String name) {
         this.name = name;
+        this.residents = new ArrayList<>();
+
         // TODO Add weather later
         // this.weather = weather;
         // TODO Add terrain later
@@ -31,6 +38,21 @@ public class Province {
     }
 
     // methods
+
+    /**
+     * Gets the residents (armies) currently in the Province
+     * @return a list of armies
+     */
+    public List<Army> getResidents() {
+        return residents;
+    }
+
+    /**
+     * Adds a resident (army) to the list of residents in the Province
+     */
+    public void addResident(Army army) {
+        residents.add(army);
+    }
 
     /**
      * Gets the name of the Province

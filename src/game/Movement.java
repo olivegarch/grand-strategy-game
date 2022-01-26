@@ -48,6 +48,7 @@ public class Movement implements Event{
             if (distTraveled >= distTotal) { // movement complete
                 System.out.println(army.getName() + " arrived at " + finishProv.getName());
                 army.setLocation(finishProv);
+                finishProv.addResident(army);
                 moveComplete = true;
             }
         } else {
