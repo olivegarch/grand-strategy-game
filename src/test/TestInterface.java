@@ -70,19 +70,19 @@ public class TestInterface {
                 clock.adv1day(events);
             // Move between provinces //
             } else if (inputList[0].equals("move")) {
-                // TODO
+                // TODO ignore caps
                 if (inputList.length == 2) {
                     boolean neighborFound = false;
-                    for (Province neighbor : region.getNeighbors(playerArmy.getLocation())) {
-                        if (neighbor.getName().equals(inputList[1])) {
+                    for (Province neighbor : region.getArmyNeighbors(playerArmy)) {
+                        if (neighbor.getName().toLowerCase().equals(inputList[1].toLowerCase())) {
                             neighborFound = true;
-                            System.out.println("Marching from " + playerArmy.getLocation().getName() +
+                            System.out.println("Marching from " + playerArmy.getLocName() +
                                     " to " + neighbor.getName() + "...");
                             Movement newMove = (playerArmy.move(neighbor));
                             if (!events.contains(newMove)) {
                                 events.add(newMove);
                             } else {
-                                System.out.println("ERROR: Already moving from " + playerArmy.getLocation().getName() +
+                                System.out.println("ERROR: Already moving from " + playerArmy.getLocName() +
                                         " to " + inputList[1]);
                             }
                             break;

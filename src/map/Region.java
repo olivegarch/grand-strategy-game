@@ -1,5 +1,7 @@
 package map;
 
+import units.Army;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -87,7 +89,14 @@ public class Region {
         return regionMap.get(node);
     }
 
-
+    /**
+     * Gets the neighbor list of the given army
+     * @param army the army with a location with neighbors
+     * @return the list of Provinces
+     */
+    public HashSet<Province> getArmyNeighbors(Army army) {
+        return getNeighbors(army.getLocation());
+    }
 
     /**
      * Generates a string representation of the Region.

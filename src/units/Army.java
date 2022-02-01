@@ -83,6 +83,18 @@ public class Army {
         return this.location;
     }
 
+    /**
+     * Gets the name of the current location
+     * @return the name of the current location
+     */
+    public String getLocName() {
+        return this.location.getName();
+    }
+
+    /**
+     * Sets the current location to the given location
+     * @param province the new location
+     */
     public void setLocation(Province province) {
         this.location = province;
     }
