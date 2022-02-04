@@ -14,17 +14,17 @@ public class Battle implements Event{
     // fields
 
     // defender
-    Army defender;
+    private Army defender;
     // attacker
-    Army attacker;
+    private Army attacker;
     // location
-    Province location;
+    private Province location;
     // battle day
-    int day;
+    private int day;
     // is the battle over
-    Boolean battleComplete;
+    private boolean battleComplete;
     // the victor
-    Army victor;
+    private Army victor;
 
     // constructor
     public Battle(Army attacker, Army defender) {

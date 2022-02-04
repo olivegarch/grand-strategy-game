@@ -8,6 +8,8 @@ package game;
  * @author OliveGarch
  */
 public interface Event {
+
+
     /**
      * Handles event updates when day is advanced.
      */

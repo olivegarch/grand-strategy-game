@@ -1,33 +1,12 @@
 package game;
 
-import map.Province;
-import units.Army;
-
-import java.util.PrimitiveIterator;
-
 /**
- * The Recovery class
- * Represents an army's action to "recover" and gain health
+ * The Support class
+ * represents an Army's support of another Army's action.
  *
  * @author OliveGarch
  */
-public class Recovery implements Event {
-
-    // fields
-
-    private Army army;
-    private Province location;
-    private boolean recoveryComplete;
-
-    // constructor
-
-    public Recovery(Army army) {
-        this.army = army;
-        this.location = army.getLocation();
-    }
-
-    // methods
-
+public class Support implements Event{
     /**
      * Handles event updates when day is advanced.
      */
