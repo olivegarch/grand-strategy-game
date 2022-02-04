@@ -18,4 +18,18 @@ public interface Event {
      * @return True if complete, False otherwise
      */
     boolean isComplete();
+
+    /**
+     * Returns a description of the event in the form:
+     * "fighting the enemy in a foreign land"
+     * "moving to the hills"
+     * @return the string describing the event action
+     */
+    String getActionDescription();
+
+    /**
+     * Returns the name if the army that is performing the event
+     * @return the army name
+     */
+    String getArmyName();
 }

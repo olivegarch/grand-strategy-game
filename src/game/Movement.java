@@ -64,4 +64,40 @@ public class Movement implements Event{
     public boolean isComplete() {
         return this.moveComplete;
     }
+
+    /**
+     * Returns a description of the event in the form:
+     * "fighting the enemy in a foreign land"
+     * "moving to the hills"
+     *
+     * @return the string describing the event action
+     */
+    @Override
+    public String getActionDescription() {
+        return "moving to the " + finishProv.getName();
+    }
+
+    /**
+     * Returns the name if the army that is performing the event
+     *
+     * @return the army name
+     */
+    @Override
+    public String getArmyName() {
+        return army.getName();
+    }
+
+    @Override
+    public int hashCode() {
+        return army.hashCode() + startProv.hashCode() + finishProv.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Movement) {
+            return o.hashCode() == this.hashCode();
+        } else {
+            return false;
+        }
+    }
 }

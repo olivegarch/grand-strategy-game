@@ -2,12 +2,14 @@ package test;
 
 import game.Clock;
 import game.Event;
+import game.Events;
 import game.Movement;
 import map.Province;
 import map.Region;
 import units.Army;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 /**
@@ -33,7 +35,7 @@ public class TestInterface {
         Army compArmy = new Army("Computer", startingProv);
 
         // make event list
-        ArrayList<Event> events = new ArrayList<>();
+        Events events = new Events();
 
         // make global clock
         Clock clock = new Clock();
@@ -66,24 +68,26 @@ public class TestInterface {
 
             // Advance one day //
             } else if (input.equals("day")) {
-                // TODO delete events that have completed
                 clock.adv1day(events);
+
             // Move between provinces //
             } else if (inputList[0].equals("move")) {
-                // TODO ignore caps
+                // TODO prevent moving while already performing a movement.
+                //  Alternatively, you can allow another movement,
+                //  but it replaces the old one, starting over from 0.
+                //  (Kinda like HOI4)
+
                 if (inputList.length == 2) {
                     boolean neighborFound = false;
                     for (Province neighbor : region.getArmyNeighbors(playerArmy)) {
                         if (neighbor.getName().toLowerCase().equals(inputList[1].toLowerCase())) {
                             neighborFound = true;
-                            System.out.println("Marching from " + playerArmy.getLocName() +
-                                    " to " + neighbor.getName() + "...");
                             Movement newMove = (playerArmy.move(neighbor));
-                            if (!events.contains(newMove)) {
-                                events.add(newMove);
+                            if (events.addEvent(newMove)) {
+                                System.out.println("Marching from " + playerArmy.getLocName() +
+                                        " to " + neighbor.getName() + "...");
                             } else {
-                                System.out.println("ERROR: Already moving from " + playerArmy.getLocName() +
-                                        " to " + inputList[1]);
+                                System.out.println("ERROR: " + newMove.getArmyName() + " is already " + newMove.getActionDescription());
                             }
                             break;
                         }
@@ -98,8 +102,9 @@ public class TestInterface {
 
             // Attack another army //
             } else if (inputList[0].equals("attack")) {
-                // TODO
-                // TODO account for duplicate battles
+                // TODO prevent moving while in battle,
+                //  to escape a battle, the command "retreat" has to be given
+                // TODO prevent duplicate battles
                 if (inputList.length == 2) {
 
                 }
@@ -113,7 +118,7 @@ public class TestInterface {
             // Display location //
             } else if (inputList[0].equals("loc")) {
                 // TODO reformat to look pretty
-                System.out.println("Current province: " + playerArmy.getLocation() +
+                System.out.println("Current province: " + playerArmy.getLocName() +
                         "\nNeighboring provinces: " + region.getNeighbors(playerArmy.getLocation()));
 
             // quit //

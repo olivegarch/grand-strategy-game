@@ -1,6 +1,7 @@
 package game;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * The Clock Class
@@ -31,10 +32,8 @@ public class Clock {
      * Advances time by 1 day for all events
      * @param events the list of events
      */
-    public void adv1day(List<Event> events) {
-        for (Event event : events) {
-            event.advanceDay();
-        }
+    public void adv1day(Events events) {
+        events.advanceAllEvents();
         this.day++;
     }
 
@@ -42,7 +41,7 @@ public class Clock {
      * Advances time by 10 days for all events
      * @param events the list of events
      */
-    public void adv10day(List<Event> events) {
+    public void adv10day(Events events) {
         for (int i = 0; i < 10; i++) {
             this.adv1day(events);
         }

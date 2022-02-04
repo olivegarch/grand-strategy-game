@@ -147,4 +147,31 @@ public class Battle implements Event{
     public boolean isComplete(){
         return this.battleComplete;
     }
+
+    /**
+     * Returns a description of the event in the form:
+     * "fighting the enemy in a foreign land"
+     * "moving to the hills"
+     *
+     * @return the string describing the event action
+     */
+    @Override
+    public String getActionDescription() {
+        return "fighting " + defender.getName() + " in the " + location.getName();
+    }
+
+    /**
+     * Returns the name if the army that is performing the event
+     *
+     * @return the army name
+     */
+    @Override
+    public String getArmyName() {
+        return attacker.getName();
+    }
+
+    @Override
+    public int hashCode() {
+        return attacker.hashCode() + defender.hashCode() + location.hashCode();
+    }
 }
