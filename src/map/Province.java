@@ -3,6 +3,7 @@ package map;
 import units.Army;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class Province {
 
     private String name;
     private List<Army> residents;
+    private HashSet<Province> neighbors;
 
     private Weather weather;
     private Terrain terrain;
@@ -28,6 +30,7 @@ public class Province {
     public Province(String name) {
         this.name = name;
         this.residents = new ArrayList<>();
+        this.neighbors = new HashSet<>();
 
         // TODO Add weather later
         // this.weather = weather;
@@ -35,6 +38,14 @@ public class Province {
         // this.terrain = terrain;
         // TODO Add vegetation later
         // this.vegetation = vegetation;
+    }
+
+    /**
+     * Adds a neighbor to the set of neighbors
+     * @param province the neighboring province added to this province
+     */
+    public void addNeighbor(Province province) {
+        this.neighbors.add(province);
     }
 
     // methods
