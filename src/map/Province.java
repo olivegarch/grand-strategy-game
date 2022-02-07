@@ -5,6 +5,7 @@ import units.Army;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The Province class
@@ -49,6 +50,10 @@ public class Province {
     }
 
     // methods
+
+    public Set<Province> getNeighbors() {
+        return this.neighbors;
+    }
 
     /**
      * Gets the residents (armies) currently in the Province

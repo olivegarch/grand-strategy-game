@@ -1,9 +1,7 @@
 package map;
 
-import units.Army;
-
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -15,15 +13,25 @@ import java.util.*;
 public class Region {
 
     private String name;
-    private HashMap<Province, HashSet<Province>> regionMap = new HashMap<>();
+    private HashMap<String, Province> regionMap;
 
-
+    /**
+     * The constructor method
+     * @param name the name of the region
+     */
     public Region(String name) {
         this.name = name;
+        this.regionMap = new HashMap<>();
     }
 
     // graph mutator methods
 
+    /**
+     * Generates Provinces and borders from a string of province names,
+     * where every province borders every other province.
+     * ex. "Hills Plains Forest"
+     * @param data the string of province names
+     */
     public void generateMap(String data) {
         for (String name : data.split(" ")) {
             Province newProvince = new Province(name);
@@ -31,31 +39,55 @@ public class Region {
         }
         for (Province node : this.getProvinces()) {
             for (Province neighbor : this.getProvinces()) {
-                this.addBorder(node, neighbor);
+                node.addNeighbor(neighbor);
             }
         }
+    }
 
+    /**
+     * Generates Provinces and borders from a file of names a relations,
+     * where the neighboring provinces of each province is specified.
+     * ex.
+     * Hills Plains Forest
+     * Hills Plains
+     * Plains Hills Forest
+     * Forest Plains
+     *
+     * @param file the pre-generated file from a filename.
+     */
+    public void generateMap(File file) {
+        try {
+            Scanner scanner = new Scanner(file);
+
+            // read the first line and make the provinces
+            String firstLine = scanner.nextLine();
+            String[] provinceNames = firstLine.split(" ");
+
+            for (String name : provinceNames) {
+                this.addProvince(new Province(name));
+            }
+
+            // assign neighbors to each province
+            String line;
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                String[] adjList = line.split(" ");
+                Province province = this.searchProvince(adjList[0]);
+                for (int i = 1; i < adjList.length; i++) {
+                    province.addNeighbor(this.searchProvince(adjList[i]));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Adds a Province to the regionMap.
-     * @param node the Province added
+     * @param province the Province added
      */
-    private void addProvince(Province node) {
-        regionMap.putIfAbsent(node, new HashSet<>());
-    }
-
-    /**
-     * Creates a "border" between 2 Provinces in regionMap
-     * @param node1 first Province name
-     * @param node2 second Province name
-     */
-    private void addBorder(Province node1, Province node2) {
-        if ((regionMap.containsKey(node1) && regionMap.containsKey(node2)) // If both are in the graph
-                && (!node1.equals(node2))) {// If they are not the same Province
-            regionMap.get(node1).add(node2);
-            regionMap.get(node2).add(node1);
-        }
+    public void addProvince(Province province) {
+        regionMap.put(province.getName(), province);
     }
 
     /**
@@ -64,12 +96,7 @@ public class Region {
      * @return the province if found in the region map, null if not found
      */
     public Province searchProvince(String label) {
-        for (Province province : regionMap.keySet()) {
-            if (province.getName().equals(label)) {
-                return province;
-            }
-        }
-        return null;
+        return regionMap.get(label);
     }
 
     /**
@@ -77,25 +104,7 @@ public class Region {
      * @return the set
      */
     public Set<Province> getProvinces() {
-        return regionMap.keySet();
-    }
-
-    /**
-     * Gets the neighbor list of the given Province
-     * @param node the Province with neighbors
-     * @return the list of Provinces
-     */
-    public HashSet<Province> getNeighbors(Province node) {
-        return regionMap.get(node);
-    }
-
-    /**
-     * Gets the neighbor list of the given army
-     * @param army the army with a location with neighbors
-     * @return the list of Provinces
-     */
-    public HashSet<Province> getArmyNeighbors(Army army) {
-        return getNeighbors(army.getLocation());
+        return (Set<Province>) regionMap.values();
     }
 
     /**
@@ -104,10 +113,10 @@ public class Region {
      */
     public String toString() {
         String result = "Region{label=" + this.name + "} Provinces:";
-        for (Province node : regionMap.keySet()) {
-            result += "\n\t" + node + " neighbors:";
-            for (Province neighbor : regionMap.get(node)) {
-                result += "\n\t\t" + neighbor;
+        for (String province : regionMap.keySet()) {
+            result += "\n\t" + province + ": ";
+            for (Province neighbor : this.searchProvince(province).getNeighbors()) {
+                result += neighbor.getName() + " ";
             }
         }
         return result;

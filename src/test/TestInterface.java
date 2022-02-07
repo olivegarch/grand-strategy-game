@@ -79,7 +79,7 @@ public class TestInterface {
 
                 if (inputList.length == 2) {
                     boolean neighborFound = false;
-                    for (Province neighbor : region.getArmyNeighbors(playerArmy)) {
+                    for (Province neighbor : playerArmy.getLocation().getNeighbors()) {
                         if (neighbor.getName().toLowerCase().equals(inputList[1].toLowerCase())) {
                             neighborFound = true;
                             Movement newMove = (playerArmy.move(neighbor));
@@ -119,7 +119,7 @@ public class TestInterface {
             } else if (inputList[0].equals("loc")) {
                 // TODO reformat to look pretty
                 System.out.println("Current province: " + playerArmy.getLocName() +
-                        "\nNeighboring provinces: " + region.getNeighbors(playerArmy.getLocation()));
+                        "\nNeighboring provinces: " + playerArmy.getLocation().getNeighbors());
 
             // quit //
             } else if (inputList[0].equals("quit")) {
