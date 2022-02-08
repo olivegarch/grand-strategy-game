@@ -1,5 +1,6 @@
 package test;
 
+import map.Continent;
 import map.Region;
 
 import java.io.File;
@@ -12,9 +13,9 @@ import java.io.File;
  */
 public class TestRegion2 {
     public static void main(String[] args) {
-        Region region = new Region("Region1");
-        File file = new File(".\\src\\map\\graphRegion2.txt");
-        region.generateMap(file);
-        System.out.println(region);
+        Continent continent = new Continent("Continent1");
+        File file = new File(".\\data\\graphRegion2.txt");
+        continent.generateMap(file);
+        System.out.println(continent);
     }
 }

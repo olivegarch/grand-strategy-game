@@ -1,7 +1,5 @@
 package map;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -24,70 +22,23 @@ public class Region {
         this.regionMap = new HashMap<>();
     }
 
-    // graph mutator methods
-
-    /**
-     * Generates Provinces and borders from a string of province names,
-     * where every province borders every other province.
-     * ex. "Hills Plains Forest"
-     * @param data the string of province names
-     */
-    public void generateMap(String data) {
-        for (String name : data.split(" ")) {
-            Province newProvince = new Province(name);
-            this.addProvince(newProvince);
-        }
-        for (Province node : this.getProvinces()) {
-            for (Province neighbor : this.getProvinces()) {
-                node.addNeighbor(neighbor);
-            }
-        }
-    }
-
-    /**
-     * Generates Provinces and borders from a file of names a relations,
-     * where the neighboring provinces of each province is specified.
-     * ex.
-     * Hills Plains Forest
-     * Hills Plains
-     * Plains Hills Forest
-     * Forest Plains
-     *
-     * @param file the pre-generated file from a filename.
-     */
-    public void generateMap(File file) {
-        try {
-            Scanner scanner = new Scanner(file);
-
-            // read the first line and make the provinces
-            String firstLine = scanner.nextLine();
-            String[] provinceNames = firstLine.split(" ");
-
-            for (String name : provinceNames) {
-                this.addProvince(new Province(name));
-            }
-
-            // assign neighbors to each province
-            String line;
-            while (scanner.hasNextLine()) {
-                line = scanner.nextLine();
-                String[] adjList = line.split(" ");
-                Province province = this.searchProvince(adjList[0]);
-                for (int i = 1; i < adjList.length; i++) {
-                    province.addNeighbor(this.searchProvince(adjList[i]));
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Adds a Province to the regionMap.
-     * @param province the Province added
+     * @param province a Province
      */
     public void addProvince(Province province) {
         regionMap.put(province.getName(), province);
+    }
+
+    /**
+     * Adds Provinces to the regionMap.
+     * @param provinces a set of Provinces
+     */
+    public void addProvinces(Set<Province> provinces) {
+        for (Province province : provinces) {
+            this.addProvince(province);
+        }
     }
 
     /**

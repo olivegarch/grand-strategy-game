@@ -4,6 +4,7 @@ import game.Clock;
 import game.Event;
 import game.Events;
 import game.Movement;
+import map.Continent;
 import map.Province;
 import map.Region;
 import units.Army;
@@ -19,13 +20,14 @@ import java.util.Scanner;
  */
 public class TestInterface {
     public static void main(String[] args) {
-        // make region
-        Region region = new Region("Region1");
-        region.generateMap("Hills Plains Forest Fields Town");
+
+        // make continent
+        Continent continent = new Continent("Mainland");
+        continent.generateStdMap("Hills Plains Forest Fields Town");
 
         // make player army
         Province startingProv = null;
-        for (Province province : region.getProvinces()) {
+        for (Province province : continent.getProvinces()) {
             startingProv = province;
             break;
         }

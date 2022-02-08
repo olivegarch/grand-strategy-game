@@ -2,6 +2,7 @@ package map;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -17,8 +18,20 @@ import java.util.Set;
 public class Continent {
 
     // fields
+    
+    private String name;
+    private HashMap<String, Province> continentMap;
 
     // constructor
+
+    /**
+     *
+     * @param label
+     */
+    public Continent(String label) {
+        this.name = label;
+        this.continentMap = new HashMap<>();
+    }
 
     /**
      * Generates Provinces and borders from a file of names a relations,
@@ -31,7 +44,8 @@ public class Continent {
      *
      * @param file the pre-generated file from a filename.
      */
-    public Continent(File file) {
+    public Continent(String label, File file) {
+        this.name = label;
         try {
             Scanner scanner = new Scanner(file);
 
@@ -60,13 +74,40 @@ public class Continent {
 
     // methods
 
+    public void generateMap(File file) {
+        try {
+            Scanner scanner = new Scanner(file);
+
+            // read the first line and make the provinces
+            String firstLine = scanner.nextLine();
+            String[] provinceNames = firstLine.split(" ");
+
+            for (String name : provinceNames) {
+                this.addProvince(new Province(name));
+            }
+
+            // assign neighbors to each province
+            String line;
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                String[] adjList = line.split(" ");
+                Province province = this.searchProvince(adjList[0]);
+                for (int i = 1; i < adjList.length; i++) {
+                    province.addNeighbor(this.searchProvince(adjList[i]));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Generates Provinces and borders from a string of province names,
      * where every province borders every other province.
      * ex. "Hills Plains Forest"
      * @param data the string of province names
      */
-    public void generateMap(String data) {
+    public void generateStdMap(String data) {
         for (String name : data.split(" ")) {
             Province newProvince = new Province(name);
             this.addProvince(newProvince);
@@ -78,14 +119,12 @@ public class Continent {
         }
     }
 
-
-
     /**
-     * Adds a Province to the regionMap.
+     * Adds a Province to the continentMap.
      * @param province the Province added
      */
     public void addProvince(Province province) {
-        regionMap.put(province.getName(), province);
+        continentMap.put(province.getName(), province);
     }
 
     /**
@@ -94,7 +133,7 @@ public class Continent {
      * @return the province if found in the region map, null if not found
      */
     public Province searchProvince(String label) {
-        return regionMap.get(label);
+        return continentMap.get(label);
     }
 
     /**
@@ -102,7 +141,7 @@ public class Continent {
      * @return the set
      */
     public Set<Province> getProvinces() {
-        return (Set<Province>) regionMap.values();
+        return (Set<Province>) continentMap.values();
     }
 
     /**
@@ -110,8 +149,8 @@ public class Continent {
      * @return the string
      */
     public String toString() {
-        String result = "Region{label=" + this.name + "} Provinces:";
-        for (String province : regionMap.keySet()) {
+        String result = "Continent{label=" + this.name + "} Provinces:";
+        for (String province : continentMap.keySet()) {
             result += "\n\t" + province + ": ";
             for (Province neighbor : this.searchProvince(province).getNeighbors()) {
                 result += neighbor.getName() + " ";
