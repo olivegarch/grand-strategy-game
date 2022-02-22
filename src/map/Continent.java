@@ -25,8 +25,9 @@ public class Continent {
     // constructor
 
     /**
-     *
-     * @param label
+     * The Continent Constructor
+     * Creates a continent given a name
+     * @param label the name of the continent
      */
     public Continent(String label) {
         this.name = label;
@@ -73,33 +74,6 @@ public class Continent {
     }
 
     // methods
-
-    public void generateMap(File file) {
-        try {
-            Scanner scanner = new Scanner(file);
-
-            // read the first line and make the provinces
-            String firstLine = scanner.nextLine();
-            String[] provinceNames = firstLine.split(" ");
-
-            for (String name : provinceNames) {
-                this.addProvince(new Province(name));
-            }
-
-            // assign neighbors to each province
-            String line;
-            while (scanner.hasNextLine()) {
-                line = scanner.nextLine();
-                String[] adjList = line.split(" ");
-                Province province = this.searchProvince(adjList[0]);
-                for (int i = 1; i < adjList.length; i++) {
-                    province.addNeighbor(this.searchProvince(adjList[i]));
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Generates Provinces and borders from a string of province names,

@@ -17,12 +17,13 @@ public class Army {
 
     // fields
 
-    private String name;
-    private double strength;
-    private int currHP;
-    private int maxHP;
-    private int speed;
-    private Province location;
+    private String name; // the name of the army
+    private double strength; // the strength of the army, (set as 1/10 of the health)
+    private int currHP; // the current health
+    private int maxHP; // the maximum health
+    private int speed; // how fast the army moves between province
+    private Province location; // the current province of the army
+    private boolean active; // whether the army is currently doing an action (involved in an event)
 
     // constructor
 
@@ -33,6 +34,7 @@ public class Army {
         this.maxHP = 100;
         this.speed = 10;
         this.strength = (double) this.currHP / 10;
+        this.active = false;
     }
 
     // methods
@@ -56,7 +58,13 @@ public class Army {
      * @param finishProv the destination
      */
     public Movement move(Province finishProv) {
-        return new Movement(this, finishProv);
+        try {
+            Movement newMove = new Movement(this, finishProv);
+            return newMove;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
     /**
@@ -134,6 +142,28 @@ public class Army {
         Random rand = new Random();
         double zScore = rand.nextGaussian();
         return (int) ( mean + (stDev * zScore));
+    }
+
+    /**
+     * Returns if the army is currently involved in an event
+     * @return true if involved, false otherwise
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * Activates the army.
+     */
+    public void activate() {
+        this.active = true;
+    }
+
+    /**
+     * Deactivates the army.
+     */
+    public void deactivate() {
+        this.active = false;
     }
 
     /**

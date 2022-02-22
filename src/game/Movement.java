@@ -17,8 +17,13 @@ public class Movement implements Event{
     private int distTotal;
     private int distTraveled;
 
-    public Movement(Army army, Province finishProv) {
+    public Movement(Army army, Province finishProv) throws Exception {
+        // TODO auto-check if the army can start a new movement?
         this.army = army;
+        if (this.army.isActive()) {
+            throw new Exception(this.army.getName() + " can't move. Already involved in an event");
+        }
+        this.army.activate();
         this.startProv = army.getLocation();
         this.finishProv = finishProv;
         this.moveComplete = false;
@@ -50,6 +55,7 @@ public class Movement implements Event{
                 army.setLocation(finishProv);
                 finishProv.addResident(army);
                 moveComplete = true;
+                army.deactivate();
             }
         } else {
             System.out.println("Movement to " + finishProv.getName() + " complete!");

@@ -79,6 +79,8 @@ public class TestInterface {
                 //  but it replaces the old one, starting over from 0.
                 //  (Kinda like HOI4)
 
+                // TODO test out making move while already performing an action.
+
                 if (inputList.length == 2) {
                     boolean neighborFound = false;
                     for (Province neighbor : playerArmy.getLocation().getNeighbors()) {
