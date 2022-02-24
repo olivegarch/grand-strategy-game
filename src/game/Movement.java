@@ -17,12 +17,10 @@ public class Movement implements Event{
     private int distTotal;
     private int distTraveled;
 
-    public Movement(Army army, Province finishProv) throws Exception {
+    public Movement(Army army, Province finishProv) {
         // TODO auto-check if the army can start a new movement?
+        //  No, doing this check in Army
         this.army = army;
-        if (this.army.isActive()) {
-            throw new Exception(this.army.getName() + " can't move. Already involved in an event");
-        }
         this.army.activate();
         this.startProv = army.getLocation();
         this.finishProv = finishProv;

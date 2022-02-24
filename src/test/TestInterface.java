@@ -54,7 +54,8 @@ public class TestInterface {
                 "\n[TODO]- move [province] (moves your army to an adjacent province)" +
                 "\n[TODO]- attack [army] (attacks the specified army if they are in an adjacent province)" +
                 "\n[TODO]- status (shows current status of your army)" +
-                "\n[TODO]- loc (shows the current location of your army and the neighboring provinces)";
+                "\n[TODO]- loc (shows the current location of your army and the neighboring provinces)" +
+                "\n[TODO]- scout (show other armies in the same region as your army)";
 
         String input = "";
         Scanner scanner = new Scanner(System.in);
@@ -87,12 +88,13 @@ public class TestInterface {
                         if (neighbor.getName().toLowerCase().equals(inputList[1].toLowerCase())) {
                             neighborFound = true;
                             Movement newMove = (playerArmy.move(neighbor));
-                            if (events.addEvent(newMove)) {
-                                System.out.println("Marching from " + playerArmy.getLocName() +
-                                        " to " + neighbor.getName() + "...");
+                            if (newMove == null) {
+                                System.out.println(playerArmy.getName() + " cannot move, already occupied in an action");
                             } else {
-                                System.out.println("ERROR: " + newMove.getArmyName() + " is already " + newMove.getActionDescription());
+
                             }
+                            System.out.println("Marching from " + playerArmy.getLocName() +
+                                    " to " + neighbor.getName() + "...");
                             break;
                         }
                     }
@@ -101,7 +103,7 @@ public class TestInterface {
                                 playerArmy.getLocation().getName());
                     }
                 } else {
-                    System.out.println("ERROR: Invalid use of 'move'. \n'move' takes one parameter, the target province");
+                    System.out.println("ERROR: Invalid use of 'move'. \nUSAGE: move [target province]");
                 }
 
             // Attack another army //

@@ -56,13 +56,12 @@ public class Army {
     /**
      * Starts a movement between 2 provinces.
      * @param finishProv the destination
+     * @return a new Movement event if the movement is possible, null otherwise.
      */
     public Movement move(Province finishProv) {
-        try {
-            Movement newMove = new Movement(this, finishProv);
-            return newMove;
-        } catch (Exception e) {
-            e.getMessage();
+        if (!this.isActive()) {
+            return new Movement(this, finishProv);
+        } else {
             return null;
         }
     }
