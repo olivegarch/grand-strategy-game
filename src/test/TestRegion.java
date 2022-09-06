@@ -16,8 +16,8 @@ import java.io.*;
 public class TestRegion {
     public static void main(String[] args) {
         Continent continent = new Continent("Continent1");
-        File file = new File(".\\src\\map\\graphRegion1.txt");
-        continent.generateMap(file);
-        System.out.println(continent);
+        File file = new File(".\\src\\data\\graphRegion1.txt");
+//        continent.generateMap(file);
+//        System.out.println(continent);
     }
 }

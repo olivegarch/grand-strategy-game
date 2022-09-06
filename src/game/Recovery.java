@@ -11,7 +11,7 @@ import java.util.PrimitiveIterator;
  *
  * @author OliveGarch
  */
-public class Recovery implements Event {
+public class Recovery extends Event {
 
     // fields
 
@@ -33,7 +33,10 @@ public class Recovery implements Event {
      */
     @Override
     public void advanceDay() {
-
+        this.army.recover();
+        if (this.army.isFullHealth()) {
+            this.recoveryComplete = true;
+        }
     }
 
     /**
@@ -43,7 +46,7 @@ public class Recovery implements Event {
      */
     @Override
     public boolean isComplete() {
-        return false;
+        return this.recoveryComplete;
     }
 
     /**
@@ -55,7 +58,17 @@ public class Recovery implements Event {
      */
     @Override
     public String getActionDescription() {
-        return null;
+        return this.getArmyName() + " recovers in " + location.getName();
+    }
+
+    /**
+     * Returns the province where the event occurs or starts
+     *
+     * @return the province location of the event
+     */
+    @Override
+    public Province getLocation() {
+        return this.location;
     }
 
     /**
@@ -65,6 +78,20 @@ public class Recovery implements Event {
      */
     @Override
     public String getArmyName() {
-        return null;
+        return this.army.getName();
+    }
+
+    @Override
+    public int hashCode() {
+        return army.hashCode() + location.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Recovery) {
+            return o.hashCode() == this.hashCode();
+        } else {
+            return false;
+        }
     }
 }

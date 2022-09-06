@@ -1,5 +1,7 @@
 package game;
 
+import map.Province;
+
 /**
  * The Event interface
  * Represents a single event,
@@ -7,19 +9,18 @@ package game;
  *
  * @author OliveGarch
  */
-public interface Event {
-
+public abstract class Event {
 
     /**
      * Handles event updates when day is advanced.
      */
-    void advanceDay();
+    abstract void advanceDay();
 
     /**
      * Returns if the event is complete or not
      * @return True if complete, False otherwise
      */
-    boolean isComplete();
+    abstract boolean isComplete();
 
     /**
      * Returns a description of the event in the form:
@@ -27,11 +28,17 @@ public interface Event {
      * "moving to the hills"
      * @return the string describing the event action
      */
-    String getActionDescription();
+    abstract String getActionDescription();
 
     /**
-     * Returns the name if the army that is performing the event
+     * Returns the province where the event occurs or starts
+     * @return the province location of the event
+     */
+    abstract Province getLocation();
+
+    /**
+     * Returns the name of the army that is performing the event or started it
      * @return the army name
      */
-    String getArmyName();
+    abstract String getArmyName();
 }

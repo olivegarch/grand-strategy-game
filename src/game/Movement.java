@@ -9,7 +9,7 @@ import units.Army;
  *
  * @author OliveGarch
  */
-public class Movement implements Event{
+public class Movement extends Event{
     private Army army;
     private Province startProv;
     private Province finishProv;
@@ -79,6 +79,24 @@ public class Movement implements Event{
     @Override
     public String getActionDescription() {
         return "moving to the " + finishProv.getName();
+    }
+
+    /**
+     * Returns the province where the event occurs or starts
+     *
+     * @return the province location of the event
+     */
+    @Override
+    public Province getLocation() {
+        return this.startProv;
+    }
+
+    /**
+     * Returns the province where the army will end its movement
+     * @return the end province location
+     */
+    public Province getEndLocation() {
+        return this.finishProv;
     }
 
     /**

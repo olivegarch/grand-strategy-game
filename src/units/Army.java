@@ -21,6 +21,7 @@ public class Army {
     private double strength; // the strength of the army, (set as 1/10 of the health)
     private int currHP; // the current health
     private int maxHP; // the maximum health
+    private int recovery;
     private int speed; // how fast the army moves between province
     private Province location; // the current province of the army
     private boolean active; // whether the army is currently doing an action (involved in an event)
@@ -32,6 +33,7 @@ public class Army {
         this.location = location;
         this.currHP = 100;
         this.maxHP = 100;
+        this.recovery = 10;
         this.speed = 10;
         this.strength = (double) this.currHP / 10;
         this.active = false;
@@ -80,6 +82,24 @@ public class Army {
      */
     public boolean isDead() {
         return currHP == 0;
+    }
+
+    /**
+     * Heals the army the recovery amount
+     */
+    public void recover() {
+        this.currHP += recovery;
+        if (currHP > maxHP) {
+            currHP = maxHP;
+        }
+    }
+
+    /**
+     * Check if the army is at full health
+     * @return true if at full health, false otherwise
+     */
+    public boolean isFullHealth() {
+        return currHP == maxHP;
     }
 
     /**

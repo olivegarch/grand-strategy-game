@@ -10,7 +10,7 @@ import units.Army;
  *
  * @author OliveGarch
  */
-public class Battle implements Event{
+public class Battle extends Event{
     // fields
 
     // defender
@@ -157,21 +157,47 @@ public class Battle implements Event{
      */
     @Override
     public String getActionDescription() {
-        return "fighting " + defender.getName() + " in the " + location.getName();
+        return attacker.getName() + " battles with " + defender.getName() + " in " + location.getName();
     }
 
     /**
-     * Returns the name if the army that is performing the event
+     * Returns the name of the attacking army
      *
-     * @return the army name
+     * @return the attacking army name
      */
     @Override
     public String getArmyName() {
         return attacker.getName();
     }
 
+    /**
+     * Returns the name of the defending army
+     *
+     * @return the defending army name
+     */
+    public String getDefenderName() {
+        return defender.getName();
+    }
+
+    /**
+     * Returns the province where the event occurs or starts
+     * @return the province location of the event
+     */
+    public Province getLocation() {
+        return this.location;
+    }
+
     @Override
     public int hashCode() {
         return attacker.hashCode() + defender.hashCode() + location.hashCode();
+    }
+
+    @Override
+    public boolean equals (Object o) {
+        if (o instanceof Battle) {
+            return o.hashCode() == this.hashCode();
+        } else {
+            return false;
+        }
     }
 }
