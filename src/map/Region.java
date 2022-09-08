@@ -1,5 +1,7 @@
 package map;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -22,6 +24,14 @@ public class Region {
         this.regionMap = new HashMap<>();
     }
 
+    public void generateMap(File file) {
+        try {
+            Scanner scanner = new Scanner(file);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Adds a Province to the regionMap.

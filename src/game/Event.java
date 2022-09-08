@@ -9,7 +9,7 @@ import map.Province;
  *
  * @author OliveGarch
  */
-public abstract class Event {
+public interface Event {
 
     /**
      * Handles event updates when day is advanced.

@@ -9,7 +9,7 @@ import units.Army;
  *
  * @author OliveGarch
  */
-public class Movement extends Event{
+public class Movement implements Event{
     private Army army;
     private Province startProv;
     private Province finishProv;
@@ -51,7 +51,6 @@ public class Movement extends Event{
             if (distTraveled >= distTotal) { // movement complete
                 System.out.println(army.getName() + " arrived at " + finishProv.getName());
                 army.setLocation(finishProv);
-                finishProv.addResident(army);
                 moveComplete = true;
                 army.deactivate();
             }
@@ -78,7 +77,7 @@ public class Movement extends Event{
      */
     @Override
     public String getActionDescription() {
-        return "moving to the " + finishProv.getName();
+        return this.army.getName() + " moves to the " + finishProv.getName();
     }
 
     /**

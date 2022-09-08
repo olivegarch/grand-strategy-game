@@ -10,7 +10,7 @@ import units.Army;
  *
  * @author OliveGarch
  */
-public class Battle extends Event{
+public class Battle implements Event{
     // fields
 
     // defender

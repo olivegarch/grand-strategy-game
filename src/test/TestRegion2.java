@@ -15,7 +15,7 @@ public class TestRegion2 {
     public static void main(String[] args) {
         Continent continent = new Continent("Continent1");
         File file = new File(".\\data\\graphRegion2.txt");
-        continent.generateMap(file);
+//        continent.generateMap(file);
         System.out.println(continent);
     }
 }

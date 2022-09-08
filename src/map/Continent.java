@@ -2,6 +2,7 @@ package map;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Set;
@@ -114,8 +115,8 @@ public class Continent {
      * Gets the set of the Region's Provinces
      * @return the set
      */
-    public Set<Province> getProvinces() {
-        return (Set<Province>) continentMap.values();
+    public Collection<Province> getProvinces() {
+        return continentMap.values();
     }
 
     /**

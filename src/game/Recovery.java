@@ -11,7 +11,7 @@ import java.util.PrimitiveIterator;
  *
  * @author OliveGarch
  */
-public class Recovery extends Event {
+public class Recovery implements Event {
 
     // fields
 

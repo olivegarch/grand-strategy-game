@@ -20,7 +20,7 @@ public class Province {
     // fields
 
     private String name;
-    private List<Army> residents;
+//    private List<Army> residents;
     private HashSet<Province> neighbors;
 
     private Weather weather;
@@ -31,7 +31,7 @@ public class Province {
 
     public Province(String name) {
         this.name = name;
-        this.residents = new ArrayList<>();
+//        this.residents = new ArrayList<>();
         this.neighbors = new HashSet<>();
 
         // TODO Add weather later
@@ -56,20 +56,20 @@ public class Province {
         return this.neighbors;
     }
 
-    /**
-     * Gets the residents (armies) currently in the Province
-     * @return a list of armies
-     */
-    public List<Army> getResidents() {
-        return residents;
-    }
-
-    /**
-     * Adds a resident (army) to the list of residents in the Province
-     */
-    public void addResident(Army army) {
-        residents.add(army);
-    }
+//    /**
+//     * Gets the residents (armies) currently in the Province
+//     * @return a list of armies
+//     */
+//    public List<Army> getResidents() {
+//        return residents;
+//    }
+//
+//    /**
+//     * Adds a resident (army) to the list of residents in the Province
+//     */
+//    public void addResident(Army army) {
+//        residents.add(army);
+//    }
 
     /**
      * Gets the name of the Province
