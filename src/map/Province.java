@@ -2,10 +2,7 @@ package map;
 
 import units.Army;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The Province class
@@ -23,9 +20,12 @@ public class Province {
 //    private List<Army> residents;
     private HashSet<Province> neighbors;
 
-    private Weather weather;
-    private Terrain terrain;
-    private Vegetation vegetation;
+    private LinkedList<Province> shortestPath = new LinkedList<>();
+    private Integer distance = Integer.MAX_VALUE;
+
+//    private Weather weather;
+//    private Terrain terrain;
+//    private Vegetation vegetation;
 
     // constructor
 
