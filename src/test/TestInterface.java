@@ -70,11 +70,13 @@ public class TestInterface {
                 System.out.println(helpMsg);
 
             // Advance one day //
-            } else if (input.equals("day")) {
+            }
+            else if (input.equals("day")) {
                 clock.adv1day(events);
 
             // Move between provinces //
-            } else if (inputList[0].equals("move")) {
+            }
+            else if (inputList[0].equals("move")) {
                 // TODO prevent moving while already performing a movement.
                 //  Alternatively, you can allow another movement,
                 //  but it replaces the old one, starting over from 0.
@@ -107,7 +109,8 @@ public class TestInterface {
                 }
 
             // Attack another army //
-            } else if (inputList[0].equals("attack")) {
+            }
+            else if (inputList[0].equals("attack")) {
                 // TODO prevent moving while in battle,
                 //  to escape a battle, the command "retreat" has to be given
                 // TODO prevent duplicate battles
@@ -122,15 +125,18 @@ public class TestInterface {
                         "\nHealth: " + playerArmy.getCurrHP());
 
             // Display location //
-            } else if (inputList[0].equals("loc")) {
+            }
+            else if (inputList[0].equals("loc")) {
                 // TODO reformat to look pretty
                 System.out.println("Current province: " + playerArmy.getLocName() +
                         "\nNeighboring provinces: " + playerArmy.getLocation().getNeighbors());
 
             // quit //
-            } else if (inputList[0].equals("quit")) {
+            }
+            else if (inputList[0].equals("quit")) {
                 break;
-            } else {
+            }
+            else {
                 System.out.println("ERROR: Invalid command");
             }
 
