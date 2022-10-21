@@ -6,6 +6,8 @@ import map.Region;
 
 import java.awt.*;
 import java.io.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * The test class for Region.
