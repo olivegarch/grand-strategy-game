@@ -16,11 +16,10 @@ import java.util.ArrayList;
  */
 public class EventController {
 
-    public void startMovement(String army_name, ArrayList<String> provinces) {
+    public static void startMovement(String army_name, ArrayList<String> provinces) {
         // check if the army is inactive
         //      then create movement object with army and province parameters.
         // if already active, then return nothing
-
 
     }
 

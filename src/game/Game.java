@@ -6,6 +6,7 @@ import java.util.HashSet;
 /**
  * The Game class
  *
+ * Stores information on players and global events
  *
  * @author OliveGarch
  */
@@ -47,27 +48,25 @@ public class Game {
         }
     }
 
+
     /**
-     * Adds a movement to the movement set
-     * @param movement the movement
+     * Creates a movement even if the army and province(s) exist
+     * @param armyName the name of the army
+     * @param provinces the list of provinces the army is moving through
      */
-    public void addMovement(Movement movement) {
-        movementEvents.add(movement);
+    public void createMovement(String armyName, ArrayList<String> provinces) {
+        // TODO finish this later
     }
 
     /**
-     * Adds a battle to the battle set
-     * @param battle the battle
+     * Checks if either of the Players have an army with the given army name
+     * @param armyName the name of the army
+     * @return true if an army with the name exists
+     *          false otherwise
      */
-    public void addBattle(Battle battle) {
-        battleEvents.add(battle);
-    }
-
-    /**
-     * Adds a recovery to the recovery set
-     * @param recovery the recovery
-     */
-    public void addRecovery(Recovery recovery) {
-        recoveryEvents.add(recovery);
+    public boolean doesArmyExist(String armyName) {
+        boolean p1HasArmy = player1.getArmyNames().contains(armyName);
+        boolean p2HasArmy = player2.getArmyNames().contains(armyName);
+        return p1HasArmy || p2HasArmy;
     }
 }
