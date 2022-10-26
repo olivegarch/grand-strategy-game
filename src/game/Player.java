@@ -23,6 +23,10 @@ public class Player {
         armyList = new HashMap<>();
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     /**
      * Adds an army with a label to the army list
      * @param armyLabel the label or quick name for the army
@@ -38,6 +42,26 @@ public class Player {
      */
     public Collection<Army> getArmies() {
         return armyList.values();
+    }
+
+    /**
+     * Gets the Army with the given name
+     * @param armyName name of the Army
+     * @return the Army object if it exists,
+     *          null if it does not exist
+     */
+    public Army getArmyByName(String armyName) {
+        return armyList.get(armyName);
+    }
+
+    /**
+     * Checks if the Player has an Army by the given name
+     * @param armyName name of the Army
+     * @return true of the Army exists,
+     *          false otherwise
+     */
+    public boolean doesPlayerHaveArmyName(String armyName) {
+        return armyList.containsKey(armyName);
     }
 
     /**

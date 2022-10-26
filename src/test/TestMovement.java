@@ -1,9 +1,8 @@
 package test;
 
 import game.Movement;
-import map.Continent;
+import map.Map;
 import map.Province;
-import map.Region;
 import units.Army;
 
 import java.util.Scanner;
@@ -16,12 +15,12 @@ import java.util.Scanner;
 public class TestMovement {
     public static void main(String[] args) {
         // make region
-        Continent continent = new Continent("Continent1");
+        Map map = new Map("Continent1");
         String provincesStr = "Fields Hills Forest";
-        continent.generateStdMap(provincesStr);
+        map.generateStdMap(provincesStr);
         String[] provinces = provincesStr.split(" ");
-        Province startingProv = continent.searchProvince(provinces[0]);
-        Province finishingProv = continent.searchProvince(provinces[1]);
+        Province startingProv = map.getProvinceByName(provinces[0]);
+        Province finishingProv = map.getProvinceByName(provinces[1]);
 
         // make army
         Army army = new Army("army1", startingProv);

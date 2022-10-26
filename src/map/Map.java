@@ -8,20 +8,18 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * The Continent class.
+ * The Map class.
  *
- * Represents an entire continuous continent,
- * of Provinces with border information,
- * where they are separated into regions.
+ * Represents an entire Map of Provinces
  *
  * @author OliveGarch
  */
-public class Continent {
+public class Map {
 
     // fields
     
     private String name;
-    private HashMap<String, Province> continentMap;
+    private HashMap<String, Province> provinceMap;
 
     // constructor
 
@@ -30,9 +28,9 @@ public class Continent {
      * Creates a continent given a name
      * @param label the name of the continent
      */
-    public Continent(String label) {
+    public Map(String label) {
         this.name = label;
-        this.continentMap = new HashMap<>();
+        this.provinceMap = new HashMap<>();
     }
 
     /**
@@ -46,7 +44,7 @@ public class Continent {
      *
      * @param file the pre-generated file from a filename.
      */
-    public Continent(String label, File file) {
+    public Map(String label, File file) {
         this.name = label;
         try {
             Scanner scanner = new Scanner(file);
@@ -64,9 +62,9 @@ public class Continent {
             while (scanner.hasNextLine()) {
                 line = scanner.nextLine();
                 String[] adjList = line.split(" ");
-                Province province = this.searchProvince(adjList[0]);
+                Province province = this.getProvinceByName(adjList[0]);
                 for (int i = 1; i < adjList.length; i++) {
-                    province.addNeighbor(this.searchProvince(adjList[i]));
+                    province.addNeighbor(this.getProvinceByName(adjList[i]));
                 }
             }
         } catch (IOException e) {
@@ -95,11 +93,11 @@ public class Continent {
     }
 
     /**
-     * Adds a Province to the continentMap.
+     * Adds a Province to the provinceMap.
      * @param province the Province added
      */
     public void addProvince(Province province) {
-        continentMap.put(province.getName(), province);
+        provinceMap.put(province.getName(), province);
     }
 
     /**
@@ -107,16 +105,25 @@ public class Continent {
      * @param label the province name
      * @return the province if found in the region map, null if not found
      */
-    public Province searchProvince(String label) {
-        return continentMap.get(label);
+    public Province getProvinceByName(String label) {
+        return provinceMap.get(label);
     }
 
+    /**
+     * Checks if the Province of the given name exists
+     * @param provinceName The province name
+     * @return true if the Province exists, false otherwise
+     */
+    public boolean doesProvinceExist(String provinceName) {
+        return provinceMap.containsKey(provinceName);
+    }
+    
     /**
      * Gets the set of the Region's Provinces
      * @return the set
      */
     public Collection<Province> getProvinces() {
-        return continentMap.values();
+        return provinceMap.values();
     }
 
     /**
@@ -125,9 +132,9 @@ public class Continent {
      */
     public String toString() {
         String result = "Continent{label=" + this.name + "} Provinces:";
-        for (String province : continentMap.keySet()) {
+        for (String province : provinceMap.keySet()) {
             result += "\n\t" + province + ": ";
-            for (Province neighbor : this.searchProvince(province).getNeighbors()) {
+            for (Province neighbor : this.getProvinceByName(province).getNeighbors()) {
                 result += neighbor.getName() + " ";
             }
         }

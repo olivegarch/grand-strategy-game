@@ -1,13 +1,8 @@
 package test;
 
-import map.Continent;
-import map.Province;
-import map.Region;
+import map.Map;
 
-import java.awt.*;
 import java.io.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * The test class for Region.
@@ -17,7 +12,7 @@ import java.util.stream.Stream;
  */
 public class TestRegion {
     public static void main(String[] args) {
-        Continent continent = new Continent("Continent1");
+        Map map = new Map("Continent1");
         File file = new File(".\\src\\data\\graphRegion1.txt");
 //        continent.generateMap(file);
 //        System.out.println(continent);

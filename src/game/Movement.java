@@ -3,6 +3,8 @@ package game;
 import map.Province;
 import units.Army;
 
+import java.util.ArrayList;
+
 /**
  * The Movement class
  * Represents a movement an army makes between 2 provinces.
@@ -21,12 +23,27 @@ public class Movement implements Event{
         // TODO auto-check if the army can start a new movement?
         //  No, doing this check in Army
         this.army = army;
-        this.army.activate();
         this.startProv = army.getLocation();
         this.finishProv = finishProv;
         this.moveComplete = false;
         this.distTraveled = 0;
         this.distTotal = 100; // for now, the default is 100 distance
+    }
+
+    public Movement(Army army, ArrayList<Province> finishProvs) {
+        this.army = army;
+        this.startProv = army.getLocation();
+        this.finishProv = finishProvs.get(finishProvs.size()-1);
+        this.moveComplete = false;
+        this.distTraveled = 0;
+        this.distTotal = 100;
+    }
+
+    /**
+     * Assigns this Movement to the Army
+     */
+    public void activateArmy() {
+        this.army.activate(this);
     }
 
     /**

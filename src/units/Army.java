@@ -1,9 +1,11 @@
 package units;
 
 import game.Battle;
+import game.Event;
 import game.Movement;
 import map.Province;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -25,6 +27,8 @@ public class Army {
     private int speed; // how fast the army moves between province
     private Province location; // the current province of the army
     private boolean active; // whether the army is currently doing an action (involved in an event)
+    // TODO get rid "active" field ^
+    private Event currentAction;
 
     // constructor
 
@@ -60,6 +64,7 @@ public class Army {
      * @param finishProv the destination
      * @return a new Movement event if the movement is possible, null otherwise.
      */
+    // TODO get rid of this
     public Movement move(Province finishProv) {
         if (!this.isActive()) {
             return new Movement(this, finishProv);
@@ -168,21 +173,30 @@ public class Army {
      * @return true if involved, false otherwise
      */
     public boolean isActive() {
-        return active;
+        return !Objects.isNull(currentAction);
     }
 
     /**
      * Activates the army.
      */
+    // TODO get rid of this
     public void activate() {
         this.active = true;
+    }
+
+    /**
+     * Sets the current action to the given Event
+     * @param event the event the Army is currently doing
+     */
+    public void activate(Event event) {
+        this.currentAction = event;
     }
 
     /**
      * Deactivates the army.
      */
     public void deactivate() {
-        this.active = false;
+        this.currentAction = null;
     }
 
     /**

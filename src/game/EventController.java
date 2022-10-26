@@ -21,6 +21,7 @@ public class EventController {
         //      then create movement object with army and province parameters.
         // if already active, then return nothing
 
+
     }
 
     public void startAttack() {
