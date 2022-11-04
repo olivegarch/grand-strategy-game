@@ -177,14 +177,6 @@ public class Army {
     }
 
     /**
-     * Activates the army.
-     */
-    // TODO get rid of this
-    public void activate() {
-        this.active = true;
-    }
-
-    /**
      * Sets the current action to the given Event
      * @param event the event the Army is currently doing
      */

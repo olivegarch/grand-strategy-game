@@ -25,9 +25,9 @@ public class Game {
 
     Map gameMap;
 
-    public Game(String p1Name, String p2Name) {
-        player1 = new Player(p1Name);
-        player2 = new Player(p2Name);
+    public Game(Player p1, Player p2) {
+        player1 = p1;
+        player2 = p2;
         movementEvents = new HashSet<>();
         battleEvents = new HashSet<>();
         recoveryEvents = new HashSet<>();

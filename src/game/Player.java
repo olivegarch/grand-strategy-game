@@ -28,13 +28,17 @@ public class Player {
     }
 
     /**
-     * Adds an army with a label to the army list
-     * @param armyLabel the label or quick name for the army
+     * Adds an army with a label to the army list to the army map
+     * Key: army name
+     * Value: Army object
+     *
      * @param army the army object
      */
-    public void addArmy (String armyLabel, Army army) {
-        armyList.put(armyLabel, army);
+    public void addArmy (Army army) {
+        armyList.put(army.getName(), army);
     }
+
+
 
     /**
      * Gets the collection of Army objects belonging to the Player
